@@ -1,7 +1,8 @@
-section .data
-
-    msg db "Hello World!",0xa, 0x0
-    numbers db "0123456789",0xa, 0x0
+; >>> Challenge
+; If we list all the natural numbers below 10 that are multiples 
+; of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+; 
+; Find the sum of all the multiples of 3 or 5 below 1000.
 
 section .bss
 
@@ -12,28 +13,16 @@ section .text
 
     global _start
 
-
-; >>> Challenge
-; If we list all the natural numbers below 10 that are multiples 
-; of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
-; 
-; Find the sum of all the multiples of 3 or 5 below 1000.
-
 _start:
-
-    ; mov rax, 100
-    ; mov rbx, 50
-    ; div rbx ; rax/rbx --> rax
-    ; call _printNumber
-
 
     ; Running total for the calulcation
     mov rcx, 0
 
-    ; EBX - Loop counter
+    ; Loop counter
     mov rbx, 0
 
     repeat:
+    
         ; Loop range
         cmp rbx, 999
         je fin
