@@ -11,6 +11,7 @@ section .text
     ; Prints a string to stdout
     global _writeString
 
+
 ; Arguments:
 ;   EAX - Number to print
 _printNumber:

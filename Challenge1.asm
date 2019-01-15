@@ -3,11 +3,8 @@
 ; of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 ; 
 ; Find the sum of all the multiples of 3 or 5 below 1000.
-
-section .text
-
-    global _start
-    extern _printNumber
+global _start
+extern _printNumber
 
 _start:
 

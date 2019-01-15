@@ -6,44 +6,65 @@
 
 ; By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 ; find the sum of the even-valued terms.
+global _start
+extern _printNumber
 
-section .data
+; Macro for finding if a number is a factor
+; Arguments
+;   - <Factor> <Number>
+%macro factor 2
+    push rax
+    push rbx
+    push rcx
+    push rdx
 
-    msg db "Hello World!",0xa
+    mov rdx, 0 ; Resets remainder
+    mov rax, %2
+    mov rbx, %1
+    div rbx
 
+    cmp rdx, 0
 
-section .text
- 
-    global _start
-    extern _printNumber
-    extern _writeString
+    pop rdx
+    pop rcx
+    pop rbx
+    pop rax
+%endmacro
 
 _start:
 
     mov rax, 1
+
+    ; Fibinachi numbers
     mov rbx, 1
     mov rcx, 2
+    mov rdx, 0
+
     repeat:
         ; Prints up to values not exceeding 4,000,000
         cmp rax, 32
         je repeat_fin
+        inc rax
 
-        ; Adds then swaps
+        ; Adds then swaps to make 
+        ; sure rbx is the biggest value
         add rbx, rcx
         xchg rbx, rcx
 
-        ; Prints out each value of the sequence
-        push rax
-        mov rax, rbx
-        call _printNumber
-        pop rax
-        
-        inc rax
+        ; Check if a value is a factor
+        factor 2, rbx
+        jne repeat
+
+        ; Adds the total to rdx
+        add rdx, rbx
+
         jmp repeat
 
-    repeat_fin:
-    
 
+    repeat_fin:
+
+        mov rax, rdx
+        call _printNumber
 
     ; exit()
     mov rbx, 0
